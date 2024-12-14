@@ -6,16 +6,18 @@
 </head>
 <body>
   <div class="container">
-    <h2>NotionX</h2>
-    <div id="auth-section">
-      <button id="connectNotion">连接到 Notion</button>
-      <button id="saveToNotion">保存到 Notion</button>
-    </div>
-    <div id="status"></div>
+    <h1>NotionX</h1>
+    <button id="connectNotion">连接到 Notion</button>
     <div id="page-selector" style="display: none;">
       <select id="pageSelect">
-        <option value="">选择保存位置...</option>
+        <option value="">请选择保存位置...</option>
       </select>
+    </div>
+    <button id="saveToNotion" style="display: none;">保存到 Notion</button>
+    <div id="status"></div>
+    <div id="loading" style="display: none;">
+      <div class="spinner"></div>
+      <div class="loading-text">加载中...</div>
     </div>
   </div>
   <script src="popup.js"></script>

@@ -8,30 +8,25 @@
    - 点击 "New integration"
    - Name: NotionX
    - Associated workspace: 选择您的工作区
-   - Type: Public integration
+   - Type: Internal integration
    - Capabilities: 确保启用以下权限：
      - Read content
      - Update content
      - Insert content
 
 2. 在集成设置页面：
-   - 复制 `OAuth client ID` 并替换 `popup/popup.js` 中的 `CLIENT_ID`
-   - 复制 `OAuth client secret` 并替换 `CLIENT_SECRET`
-   - 在 "OAuth Domain & URIs" 部分：
-     - OAuth domain: chrome-extension://[您的扩展ID]
-     - Redirect URIs: chrome-extension://[您的扩展ID]/oauth.html
+   - 复制 `Internal Integration Token`
 
-3. 获取扩展 ID：
-   - 在 Chrome 中打开 `chrome://extensions`
-   - 启用 "开发者模式"
-   - 加载已解压的扩展（选择项目文件夹）
-   - 复制显示的扩展 ID
+3. 在您想要保存内容的 Notion 页面中：
+   - 点击右上角的 Share 按钮
+   - 点击 "Invite"
+   - 在弹出的列表中找到并选择 "NotionX"
 
 ## 使用方法
 
 1. 点击扩展图标
-2. 点击 "连接到 Notion"
-3. 在弹出的 Notion 授权页面中选择工作区并授权
+2. 按照提示输入 Integration Token
+3. 选择要保存的目标页面（需要先在页面中添加集成权限）
 4. 选择要保存的目标页面
 5. 点击 "保存到 Notion"
 

@@ -2,39 +2,42 @@
   "manifest_version": 3,
   "name": "NotionX",
   "version": "1.0",
-  "description": "将网页内容保存到 Notion，支持 Twitter 线程",
+  "description": "Save web content to Notion",
   "permissions": [
-    "activeTab",
     "storage",
-    "scripting",
     "tabs",
-    "identity"
+    "scripting",
+    "activeTab"
   ],
   "host_permissions": [
     "https://api.notion.com/*",
-    "https://twitter.com/*",
-    "https://notion.so/*",
-    "https://www.notion.so/*"
+    "*://*.twitter.com/*",
+    "*://*.x.com/*",
+    "*://*.weixin.qq.com/*"
   ],
-  "action": {
-    "default_popup": "popup/popup.html",
-    "default_icon": {
-      "16": "icons/icon16.png",
-      "48": "icons/icon48.png",
-      "128": "icons/icon128.png"
-    }
-  },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["scripts/content.js"]
+      "matches": [
+        "*://*.twitter.com/*",
+        "*://twitter.com/*",
+        "*://*.x.com/*",
+        "*://x.com/*",
+        "*://*.weixin.qq.com/s/*"
+      ],
+      "js": [
+        "scripts/extractors/base.js",
+        "scripts/extractors/twitter.js",
+        "scripts/extractors/wechat.js",
+        "scripts/content.js"
+      ],
+      "run_at": "document_idle"
     }
   ],
-  "background": {
-    "service_worker": "scripts/background.js"
+  "action": {
+    "default_popup": "popup/popup.html"
   },
   "web_accessible_resources": [{
-    "resources": ["oauth.html"],
-    "matches": ["https://api.notion.com/*"]
+    "resources": ["scripts/*", "icons/*"],
+    "matches": ["<all_urls>"]
   }]
 } 

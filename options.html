@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NotionX 设置</title>
+  <link rel="stylesheet" href="popup/popup.css">
+</head>
+<body>
+  <div class="container">
+    <h2>NotionX 设置</h2>
+    <div class="settings-group">
+      <label>
+        <input type="checkbox" id="autoClose">
+        保存成功后自动关闭
+      </label>
+    </div>
+    <div class="settings-group">
+      <label>保存格式：</label>
+      <select id="saveFormat">
+        <option value="markdown">Markdown</option>
+        <option value="plain">纯文本</option>
+      </select>
+    </div>
+    <button id="save">保存设置</button>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html> 

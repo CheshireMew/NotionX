@@ -51,7 +51,8 @@
             link.click();
         }
 
-        // 生成三种尺寸的图标
+        // 生成三种尺寸的图标 (16x16, 48x48, 128x128)
+        // 分别适用于浏览器标签页图标、Windows任务栏图标和应用程序图标等场景
         drawIcon(document.getElementById('canvas16'));
         drawIcon(document.getElementById('canvas48'));
         drawIcon(document.getElementById('canvas128'));

@@ -41,4 +41,63 @@ export const showMessage = (element, message, type = 'info') => {
   
   element.textContent = message;
   element.style.color = colors[type];
-}; 
+};
+
+export const utils = {
+  debounce(fn, delay) {
+    let timer = null;
+    return function(...args) {
+      clearTimeout(timer);
+      timer = setTimeout(() => fn.apply(this, args), delay);
+    };
+  },
+
+  async retry(fn, maxRetries = 3, delay = 1000) {
+    try {
+      return await fn();
+    } catch (error) {
+      if (maxRetries > 0) {
+        await new Promise(resolve => setTimeout(resolve, delay));
+        return this.retry(fn, maxRetries - 1, delay);
+      }
+      throw error;
+    }
+  },
+
+  validateToken(token) {
+    return typeof token === 'string' && token.startsWith('ntn_');
+  },
+
+  handleError(error, context = '') {
+    console.error(`Error in ${context}:`, error);
+    return {
+      success: false,
+      error: error.message || '未知错误',
+      context
+    };
+  }
+};
+
+// 添加日志工具
+export class Logger {
+  static levels = {
+    ERROR: 'error',
+    WARN: 'warn',
+    INFO: 'info',
+    DEBUG: 'debug'
+  };
+
+  static log(level, message, data = null) {
+    const timestamp = new Date().toISOString();
+    const logEntry = {
+      timestamp,
+      level,
+      message,
+      data
+    };
+
+    console[level](JSON.stringify(logEntry));
+
+    // 可以添加发送到远程日志服务的逻辑
+  }
+} 
