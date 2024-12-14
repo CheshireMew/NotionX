@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Notion-style Icons</title>
+</head>
+<body>
+    <canvas id="canvas16" width="16" height="16"></canvas>
+    <canvas id="canvas48" width="48" height="48"></canvas>
+    <canvas id="canvas128" width="128" height="128"></canvas>
+    <script>
+        function drawIcon(canvas) {
+            const ctx = canvas.getContext('2d');
+            const size = canvas.width;
+            
+            // 背景 - Notion风格的白色
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, size, size);
+            
+            // 添加圆角
+            ctx.beginPath();
+            const radius = size * 0.2;
+            ctx.moveTo(0, radius);
+            ctx.lineTo(0, size - radius);
+            ctx.quadraticCurveTo(0, size, radius, size);
+            ctx.lineTo(size - radius, size);
+            ctx.quadraticCurveTo(size, size, size, size - radius);
+            ctx.lineTo(size, radius);
+            ctx.quadraticCurveTo(size, 0, size - radius, 0);
+            ctx.lineTo(radius, 0);
+            ctx.quadraticCurveTo(0, 0, 0, radius);
+            ctx.closePath();
+            ctx.clip();
+            
+            // 文字 - Notion风格的黑色
+            ctx.fillStyle = '#000000';
+            ctx.font = `bold ${size * 0.7}px Inter, -apple-system, BlinkMacSystemFont, sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('X', size/2, size/2);
+            
+            // 添加细微阴影效果
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
+            ctx.shadowBlur = size * 0.1;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = size * 0.02;
+            
+            // 下载链接
+            const link = document.createElement('a');
+            link.download = `icon${size}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        // 生成三种尺寸的图标
+        drawIcon(document.getElementById('canvas16'));
+        drawIcon(document.getElementById('canvas48'));
+        drawIcon(document.getElementById('canvas128'));
+    </script>
+</body>
+</html> 
